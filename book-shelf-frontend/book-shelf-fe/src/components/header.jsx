@@ -6,7 +6,7 @@ export function Header(){
          <header>
         <nav className="nav-list">
             <div className="icon">
-          <Link to="book-shelf">📚My BookShelf</Link>
+          <Link to="/book-shelf">📚My BookShelf</Link>
         </div>
             <ul className="nav-links">
                 <li><Link to="/login">Login</Link></li>
