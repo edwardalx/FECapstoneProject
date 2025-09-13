@@ -6,7 +6,8 @@ import './App.css'
 import { Header } from './components/header'
 import { Login } from './pages/login';
 import {Home} from './pages/home'
-import { BookShelf } from './pages/bookShelf';
+import { BookShelf } from './pages/bookShelfForm';
+import BookList from './pages/BookList';
 
 function App() {
 
@@ -14,9 +15,10 @@ function App() {
    <>
       <Header />
       <Routes>
-        <Route path="/book-shelf" element={<BookShelf />} />
+        <Route path="/book-form" element={<BookShelf />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path='/book-list' element={<BookList />} />
       </Routes>
     </>
 
