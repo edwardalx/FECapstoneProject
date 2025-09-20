@@ -161,3 +161,8 @@ C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\obj\Debug\net9.0\rpswa
 C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\obedd\MyAlxProjects\MyDotNetProject\BookShelfApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
