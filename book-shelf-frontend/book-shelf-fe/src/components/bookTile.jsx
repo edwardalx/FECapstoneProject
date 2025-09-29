@@ -1,10 +1,10 @@
 import '../css/tile.css';
 import { Link } from "react-router-dom";
 
-export function Tile({ title, Author, Published, Status }) {
+export function Tile({ icon,title, Author, Published, Status }) {
   return (
     <div>
-    <Link to={path} className="tile">
+    <Link to="/" className="tile">
       <div className="tile-icon">{icon}</div>
       <h3>📖{title}</h3>
       <p>{Author}</p>
