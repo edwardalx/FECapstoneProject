@@ -54,7 +54,7 @@ namespace BookShelfApi.Controllers
 
 
         // GET: api/books
-        [HttpGet("paged")]
+        [HttpGet]
         public async Task<ActionResult<PagedResponse<BooksDto>>> GetBooks(
             [FromQuery] PaginationParams paginationParams)
         {
