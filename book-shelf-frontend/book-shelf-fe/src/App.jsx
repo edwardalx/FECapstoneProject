@@ -8,6 +8,8 @@ import { Login } from './pages/login';
 import {Home} from './pages/home'
 import { BookShelf } from './pages/bookShelfForm';
 import BookList from './pages/BookList';
+import BookDetailCard from './components/BookDetailCard';
+import BookDetails from './pages/BookDetails';
 
 function App() {
 
@@ -15,10 +17,12 @@ function App() {
    <>
       <Header />
       <Routes>
+        {/* <Route path='*' element={<p className='text-red-600'>⚠️Sorry this page is not available</p>} /> */}
         <Route path="/book-form" element={<BookShelf />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path='/book-list' element={<BookList />} />
+        <Route path='/book/:id' element = {<BookDetails />} />
       </Routes>
     </>
 

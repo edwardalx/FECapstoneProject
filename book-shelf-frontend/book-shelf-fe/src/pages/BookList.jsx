@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useStore } from "../zu-store/bookShelfStore";
+import { useBookStore } from "../zu-store/bookShelfStore";
 import getBooks from "../Services/BooksService";
-import { Tile } from "../components/bookTile";
+import { Tile } from "../components/BookTile";
 
 function BookList() {
-  const books = useStore((state) => state.books);
-  const setBooks = useStore((state) => state.setBooks);
+  const books = useBookStore((state) => state.books);
+  const setBooks = useBookStore((state) => state.setBooks);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -31,7 +31,7 @@ function BookList() {
         {loading && <p>Data Loading</p>}
        <div className="flex flex-wrap gap-2 justify-center">
          {books.map((b) => (
-          <div key={b.id}>{<Tile title={b.title} />}</div>
+          <div key={b.id}>{<Tile book={b} />}</div>
         ))}
        </div>
       </div>
