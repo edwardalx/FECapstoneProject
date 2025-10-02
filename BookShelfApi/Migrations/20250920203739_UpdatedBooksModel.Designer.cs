@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShelfApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250920153651_updated-books-model")]
-    partial class updatedbooksmodel
+    [Migration("20250920203739_UpdatedBooksModel")]
+    partial class UpdatedBooksModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
