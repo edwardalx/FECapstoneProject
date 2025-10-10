@@ -8,9 +8,9 @@ namespace BookShelfApi.Profiles
     {
         public BookProfile()
         {
-            // Source -> Target
-            // CreateMap<Book, BookDto>();  When getting data, map Model to DTO
-            CreateMap<UpdateBooksDto, Book>(); // When updating, map UpdateDTO to Model
+            CreateMap<Book, BooksDto>()
+                .ForMember(dest => dest.Writter, opt => opt.MapFrom(src => src.Author));
+            CreateMap<UpdateBooksDto, Book>();
         }
     }
 }

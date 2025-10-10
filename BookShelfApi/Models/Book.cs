@@ -12,5 +12,6 @@ namespace BookShelfApi.Models
         public string Image_url { get; set; } = string.Empty;
         public bool IsAvailable { get; set; }
 
+        public virtual ICollection<User> ReadByUsers { get; set; } = new List<User>();
     }
 }

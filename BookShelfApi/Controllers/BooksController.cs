@@ -20,8 +20,8 @@ namespace BookShelfApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public IActionResult GetBooks() => Ok(_context.Books.ToList());
+        [HttpGet("all")]
+        public IActionResult GetAllBooks() => Ok(_context.Books.ToList());
 
         [HttpGet("{id}")]
         public IActionResult GetBook(int id) =>
@@ -53,8 +53,8 @@ namespace BookShelfApi.Controllers
         }
 
 
-        // GET: api/books
-        [HttpGet]
+        // GET: api/books/paged
+        [HttpGet("paged")]
         public async Task<ActionResult<PagedResponse<BooksDto>>> GetBooks(
             [FromQuery] PaginationParams paginationParams)
         {
@@ -96,9 +96,39 @@ namespace BookShelfApi.Controllers
             }
 
             // Sorting
-            query = request.Descending
-                ? query.OrderByDescending(b => EF.Property<object>(b, request.SortBy!))
-                : query.OrderBy(b => EF.Property<object>(b, request.SortBy!));
+            if (!string.IsNullOrEmpty(request.SortBy))
+            {
+                switch (request.SortBy.ToLower())
+                {
+                    case "title":
+                        query = request.Descending 
+                            ? query.OrderByDescending(b => b.Title)
+                            : query.OrderBy(b => b.Title);
+                        break;
+                    case "author":
+                        query = request.Descending
+                            ? query.OrderByDescending(b => b.Author)
+                            : query.OrderBy(b => b.Author);
+                        break;
+                    case "publisheddate":
+                        query = request.Descending
+                            ? query.OrderByDescending(b => b.PublishedDate)
+                            : query.OrderBy(b => b.PublishedDate);
+                        break;
+                    case "price":
+                        query = request.Descending
+                            ? query.OrderByDescending(b => b.Price)
+                            : query.OrderBy(b => b.Price);
+                        break;
+                    default:
+                        query = query.OrderBy(b => b.Title); // Default sorting
+                        break;
+                }
+            }
+            else
+            {
+                query = query.OrderBy(b => b.Title); // Default sorting when no sort field is specified
+                }
 
             // Count total before pagination
             var totalCount = await query.CountAsync();
@@ -117,6 +147,83 @@ namespace BookShelfApi.Controllers
             return Ok(response);
         }
 
+        // GET: api/books/user/{userId}/read
+        [HttpGet("user/{userId}/read")]
+        public async Task<IActionResult> GetBooksReadByUser(int userId)
+        {
+            var userBooks = await _context.UserBooks
+                .Include(ub => ub.Book)
+                .Where(ub => ub.UserId == userId)
+                .OrderByDescending(ub => ub.ReadDate)
+                .Select(ub => new
+                {
+                    Book = _mapper.Map<BooksDto>(ub.Book),
+                    ReadDate = ub.ReadDate
+                })
+                .ToListAsync();
+
+            if (!userBooks.Any())
+            {
+                return NotFound($"No books found for user with ID {userId}");
+            }
+
+            return Ok(userBooks);
+        }
+
+        // POST: api/books/{bookId}/read/{userId}
+        [HttpPost("{bookId}/read/{userId}")]
+        public async Task<IActionResult> MarkBookAsRead(int bookId, int userId)
+        {
+            var book = await _context.Books.FindAsync(bookId);
+            if (book == null)
+            {
+                return NotFound($"Book with ID {bookId} not found");
+            }
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound($"User with ID {userId} not found");
+            }
+
+            // Check if the book is already marked as read by the user
+            var existingRecord = await _context.UserBooks
+                .FirstOrDefaultAsync(ub => ub.UserId == userId && ub.BookId == bookId);
+
+            if (existingRecord != null)
+            {
+                return BadRequest("This book is already marked as read by the user");
+            }
+
+            var userBook = new UserBook
+            {
+                UserId = userId,
+                BookId = bookId,
+                ReadDate = DateTime.UtcNow
+            };
+
+            _context.UserBooks.Add(userBook);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Book marked as read successfully", ReadDate = userBook.ReadDate });
+        }
+
+        // DELETE: api/books/{bookId}/read/{userId}
+        [HttpDelete("{bookId}/read/{userId}")]
+        public async Task<IActionResult> UnmarkBookAsRead(int bookId, int userId)
+        {
+            var userBook = await _context.UserBooks
+                .FirstOrDefaultAsync(ub => ub.UserId == userId && ub.BookId == bookId);
+
+            if (userBook == null)
+            {
+                return NotFound("Book is not marked as read by this user");
+            }
+
+            _context.UserBooks.Remove(userBook);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Book unmarked as read successfully" });
+        }
     }
 }
-

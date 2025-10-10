@@ -1,0 +1,51 @@
+# BookShelf API - Authentication Endpoints
+
+### Register a new user
+POST http://localhost:5093/api/Auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Password123!",
+  "firstName": "John",
+  "lastName": "Doe"
+}
+
+### Login
+POST http://localhost:5093/api/Auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Password123!"
+}
+
+### Refresh Token
+POST http://localhost:5093/api/Auth/refresh-token
+Content-Type: application/json
+
+{
+  "token": "your-jwt-token",
+  "refreshToken": "your-refresh-token"
+}
+
+### Get User Profile
+GET http://localhost:5093/api/Auth/profile
+Authorization: Bearer your-jwt-token
+
+### Request Password Reset
+POST http://localhost:5093/api/Auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+
+### Reset Password
+POST http://localhost:5093/api/Auth/reset-password
+Content-Type: application/json
+
+{
+  "token": "reset-token",
+  "newPassword": "NewPassword123!"
+}

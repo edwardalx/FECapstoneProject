@@ -1,0 +1,96 @@
+1. 
+Implement Authentication/Authorization
+Create a user table in the Be [fields: username, password,email, isadmin,Books_read[]]  is admin can only be added in the DB
+Core Requirements
+A production-ready auth service should include:
+• User registration with secure password hashing
+• Login with credential verification
+• JWT access token + refresh token generation
+• Role-based authorization
+• Token expiration and refresh flow
+• Secure logout (invalidate refresh tokens)
+3. Data Model
+Use an Entity Framework Core model for Users and RefreshTokens.
+
+public class User
+{
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string PasswordHash { get; set; }
+    public string Role { get; set; } // e.g., "Admin", "User"
+    public List<RefreshToken> RefreshTokens { get; set; }
+}
+
+public class RefreshToken
+{
+    public int Id { get; set; }
+    public string Token { get; set; }
+    public DateTime Expires { get; set; }
+    public bool IsRevoked { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
+}
+
+
+4. Registration
+
+• Check if username already exists.
+• Hash the password using BCrypt before saving.
+• Assign a default role (e.g., "User").
+
+
+5. Login & JWT Generation
+
+• Verify password using BCrypt.
+• Generate a short-lived JWT access token (e.g., 15 mins).
+• Generate a long-lived refresh token (e.g., 7 days) and save it in the database.
+• Return both tokens to the client.
+
+
+
+// Example token generation snippet:
+var tokenHandler = new JwtSecurityTokenHandler();
+var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+var tokenDescriptor = new SecurityTokenDescriptor
+{
+    Subject = new ClaimsIdentity(new[] 
+    { 
+        new Claim(ClaimTypes.Name, user.Username),
+        new Claim(ClaimTypes.Role, user.Role)
+    }),
+    Expires = DateTime.UtcNow.AddMinutes(15),
+    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+};
+var token = tokenHandler.CreateToken(tokenDescriptor);
+string jwt = tokenHandler.WriteToken(token);
+
+
+6. Refresh Token Endpoint
+
+• Accept refresh token from client.
+• Validate that it exists, is not expired, and not revoked.
+• Issue a new JWT and a new refresh token.
+• Revoke the old refresh token (to prevent reuse).
+
+
+7. Role-Based Authorization
+
+Use [Authorize(Roles = "Admin")] or [Authorize(Roles = "User")] attributes on controllers to enforce permissions.
+
+
+8. Secure Logout
+
+• Remove or revoke the refresh token in the database.
+• Client deletes its local access + refresh tokens.
+
+
+9. Security Best Practices
+
+• Always hash passwords using BCrypt or PBKDF2.
+• Use HTTPS everywhere.
+• Keep JWT expiry short (5-15 mins).
+• Use refresh tokens for session continuity.
+• Implement token rotation (each refresh returns a new token).
+• Log failed login attempts and consider rate limiting.
+
+
