@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useBookStore } from "../zu-store/bookShelfStore";
 import getBooks from "../Services/BooksService";
-import { Tile } from "../components/BookTile";
+import { Tile } from "../components/bookTile";
 
 function BookList() {
   const books = useBookStore((state) => state.books);
