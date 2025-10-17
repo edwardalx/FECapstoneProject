@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useBookStore } from "../zu-store/bookShelfStore";
-import getBooks from "../Services/BooksService";
+import {getBooks} from "../Services/BooksService";
 import { Tile } from "../components/bookTile";
 
 function BookList() {
@@ -26,7 +26,7 @@ function BookList() {
 
   return (
     <div className="flex flex-col justify-center ">
-      <h2 className="text-2xl">Books</h2>
+      <h2 className="text-2xl font-medium my-10 mt-15">BOOKS</h2>
       <div >
         {loading && <p>Data Loading</p>}
        <div className="flex flex-wrap gap-2 justify-center">

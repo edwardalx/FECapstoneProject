@@ -5,35 +5,35 @@ export function BookShelf() {
       <header>
         <h2 className="text-xl font-bold ml-1.5">Add a New Book</h2>
       </header>
-      <form action="" className="">
+      <form action="" className="flex ">
         <div className="title">
           <label htmlFor="title" className="ml-1">
             Title:
           </label>
-          <input type="text" id="title" name="title" className="border" />
+          <input type="text" id="title" name="title" className="border px-10" />
         </div>
-        <div className="author">
+        <div className="author flex">
           <label htmlFor="author">Author:</label>
-          <input type="text" id="author" name="author" className="border" />
+          <input type="text" id="author" name="author" className="border px-10" />
         </div>
-        <div className="year mr-24">
+        <div className="year item-start mr-24">
           <label htmlFor="year"className="">Published:</label>
-          <input type="date" id="year" name="year" className="border" />
+          <input type="date" id="year" name="year" className="border px-10 appearance-none mb-2" />
         </div>
-         <div className="flex justify-center gap-2">
+         <div className="flex  gap-2">
           <label htmlFor="summary" className="">
             Summary:
           </label>
           <textarea
             id="summary"
             name="summary"
-            className="border rounded p-2 w-full mr-15 resize-none overflow-x-auto w-32 sm:w-40 md:w-48"
+            className="border mb-3 px-10 w-full mr-15 resize-none overflow-x-auto w-32 sm:w-40 md:w-48"
             rows={4}
           />
         </div>
          <div className="flex gap-2 m-2">
-          <label htmlFor="read">Genre:</label>
-          <select name="genre" id="genre" className="border rounded mr-17 ">
+          <label htmlFor="read" className="ml-3">Genre:</label>
+          <select name="genre" id="genre" className="border   px-10">
             <option value="">-- Select a Genre --</option>
             <option value="Satire">Satire</option>
              <option value="Poetry">Poetry</option>
