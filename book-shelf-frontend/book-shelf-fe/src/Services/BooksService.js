@@ -14,7 +14,7 @@ export async function getBooks() {
   return resBody; // ✅ return data so store can use it
 }
 
- export async function getPagedBooks(page) {
+export async function getPagedBooks(page) {
   const baseUrl = "/api/v1/Books";
   const response = await fetch(`${baseUrl}/paged?PageNumber=${page}`, {
     method: "GET",
@@ -29,9 +29,32 @@ export async function getBooks() {
   return resBody; // ✅ return data so store can use it
 }
 
+export async function getByQuery(author) {
+  const reqBody = {
+    pageNumber: 0,
+    searchTerm: author ??"",
+    sortBy: "string",
+    descending: true,
+    pageSize: 0,
+  };
+  const baseUrl = "/api/v1/Books";
+  const response = await fetch(`${baseUrl}/books/paged`, {
+    method: "POST",
+    body: JSON.stringify(reqBody),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer YOUR_TOKEN_HERE",
+    },
+  });
+
+  const resBody = await response.json();
+  console.log("Filtered Response Body:", resBody);
+  return resBody; // ✅ return data so store can use it
+}
+
 const bookService = {
   getBooks,
-  getPagedBooks
+  getPagedBooks,
 };
 
 export default bookService;

@@ -42,8 +42,8 @@ export default function BookDetails() {
       {error && <p className="text-red-600">❗{error}</p>}
       {loading && (
         <p className="text-green-600">
-          {" "}
-          <span>☸️ </span>Loading ...{" "}
+        
+          <span>☸️ </span>Loading ...
         </p>
       )}
       <BookDetailCard book={filteredBook} />
