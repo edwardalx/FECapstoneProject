@@ -7,7 +7,7 @@ export default function BookDetailCard({ book }) {
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden relative flex flex-col h-full justify-between ">
           {/* Green gradient header */}
           <div className="p-5 bg-gradient-to-br from-gray-800 via-green-800 to-green-600 text-2xl font-medium" >
-            <h1>{book.author}'s</h1>
+            <h1>{book.writter}'s</h1>
           </div>
           
                   {/* Content + Button section */}

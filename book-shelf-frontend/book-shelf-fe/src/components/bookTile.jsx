@@ -15,7 +15,7 @@ export function Tile({ book }) {
         </div>
         <div className="p-.5 flex flex-col gap-.5">
           <h3 className={`text-sm font-semibold line-clamp-2 ${(book.title).length >20 && "text-xs"}`}>{book.title}</h3>
-          <p className="text-xs text-gray-600 font-bold">{book.author}</p>
+          <p className="text-xs text-gray-600 font-bold">{book.writter}</p>
         </div>
       </Link>
     </div>
