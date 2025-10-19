@@ -8,8 +8,9 @@ import { Login } from './pages/login';
 import {Home} from './pages/home'
 import { BookShelf } from './pages/bookShelfForm';
 import BookList from './pages/BookList';
-import BookDetailCard from './components/BookDetailCard';
 import BookDetails from './pages/BookDetails';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/book-list' element={<BookList />} />
         <Route path='/book/:id' element = {<BookDetails />} />
       </Routes>
+      <ToastContainer />
     </>
 
   )

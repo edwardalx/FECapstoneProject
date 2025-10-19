@@ -1,11 +1,18 @@
 import { useState } from "react";
 import "../css/login.css";
 import { LoginRequest } from "../Services/AuthService";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTokenStore } from "../zu-store/authStore";
 
 export function Login() {
+  const setToken = useTokenStore((state)=>(state.setToken))
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const notifySuccess = () => toast("You are logged in!!!");
+  const navigate = useNavigate();
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -13,22 +20,17 @@ export function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // if (form.email.trim().length <= 2) {
-    //   setError("Please enter a valid email");
-    //   return;
-    // }
-    // if (!form.password) {
-    //   setError("Please enter a valid password");
-    //   return;
-    // }
     try {
       let responseData = await LoginRequest(form);
       if (responseData.token) {
-        console.log(
-          "After login will set in local storage: ",
-          responseData.token
+        notifySuccess();
+        localStorage.setItem(
+          "access_token",
+          `${JSON.stringify(responseData.token)}`
         );
+        setToken(responseData.token)
         setForm({ email: "", password: "" });
+        navigate("/");
         return;
       }
       if (responseData.status === 400) {
@@ -75,7 +77,7 @@ export function Login() {
               className="text-white border border-black"
               placeholder="Enter Email"
               value={form.email}
-               autoComplete="current-username" 
+              autoComplete="current-username"
               onChange={handleChange}
             />
           </div>
