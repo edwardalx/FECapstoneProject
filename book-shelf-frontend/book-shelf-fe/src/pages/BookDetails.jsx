@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BookDetailCard from "../components/BookDetailCard";
 import { useBookStore } from "../zu-store/bookShelfStore";
 import { useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 export default function BookDetails() {
   const books = useBookStore((state) => state.books);
   const { id } = useParams();
@@ -48,6 +49,7 @@ export default function BookDetails() {
       )}
       <BookDetailCard book={filteredBook} />
       {console.log("Book detail of :", filteredBook)}
+      {/* <Outlet /> */}
     </div>
   );
 }

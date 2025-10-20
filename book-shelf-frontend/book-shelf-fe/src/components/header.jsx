@@ -5,9 +5,6 @@ import { useTokenStore } from "../zu-store/authStore";
 
 export function Header() {
   const token = useTokenStore((state) => state.token);
-  const setToken = useTokenStore((state) => state.setToken);
-  const grabToken = localStorage.getItem("access_token");
-  const storageToken = JSON.parse(grabToken);
 
   const logout = () => {
     localStorage.removeItem("access_token");
@@ -26,7 +23,7 @@ export function Header() {
         </div>
         <ul className="nav-links gap-20">
           <li>
-            {token ||storageToken ? (
+            {token ? (
               <Link
                 to="/"
                 onClick={logout}
