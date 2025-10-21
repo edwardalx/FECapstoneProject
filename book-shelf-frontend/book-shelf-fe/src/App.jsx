@@ -11,6 +11,7 @@ import BookList from "./pages/BookList";
 import BookDetails from "./pages/BookDetails";
 import Payments from "./pages/Payments";
 import PrivateRoute from "./components/ProtectedRoute";
+import PermissionRoute from "./components/PermissionRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,7 +21,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='*' element={<p className='text-red-600'>⚠️Sorry this page is not available</p>} />
-        <Route path="/book-form" element={<PrivateRoute><BookShelf /></PrivateRoute>} />
+        <Route path="/book-form" element={<PrivateRoute><PermissionRoute><BookShelf /></PermissionRoute> </PrivateRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/book-list" element={<BookList />} />
