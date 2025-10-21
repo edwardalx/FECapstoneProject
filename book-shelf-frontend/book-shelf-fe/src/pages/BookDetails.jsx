@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 export default function BookDetails() {
   const books = useBookStore((state) => state.books);
+  const filteredData = useBookStore((state) => state.filteredData);
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,21 +14,19 @@ export default function BookDetails() {
   useEffect(() => {
     try {
       setLoading(true);
-      const storedBook = localStorage.getItem("selectedBook");
-      if ((!storedBook || storedBook === "{}") && books.length === 0) {
-        setError("No books in store");
-      }
-      if (books.length === 0) {
+      let storedBook = localStorage.getItem("selectedBook");
+      if (storedBook) {
         setFilteredBook(JSON.parse(storedBook));
-      } else {
-        if (books.length !== 0) {
-          let selectedBook = books.find((x) => x.id === Number(id));
+        return;
+      }
+      if (books.length !== 0 || filteredData.length !== 0) {
+        let selectedBook =
+          books.find((x) => x.id === Number(id)) ||
+          filteredData.find((x) => x.id === Number(id));
+        if (selectedBook) {
           setFilteredBook(selectedBook);
-          console.log("Filterbook is", Object.keys(filteredBook).length !==0? filteredBook:selectedBook);
-          localStorage.setItem(
-            "selectedBook",
-            JSON.stringify(selectedBook ? selectedBook : filteredBook)
-          );
+          console.log("Filterbook is", selectedBook);
+          localStorage.setItem("selectedBook", JSON.stringify(selectedBook));
         }
       }
     } catch (error) {
@@ -43,13 +42,12 @@ export default function BookDetails() {
       {error && <p className="text-red-600">❗{error}</p>}
       {loading && (
         <p className="text-green-600">
-        
           <span>☸️ </span>Loading ...
         </p>
       )}
       <BookDetailCard book={filteredBook} />
       {console.log("Book detail of :", filteredBook)}
-      {/* <Outlet /> */}
+      <Outlet />
     </div>
   );
 }

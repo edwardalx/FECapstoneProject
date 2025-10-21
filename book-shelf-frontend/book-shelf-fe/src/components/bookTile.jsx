@@ -32,7 +32,7 @@ export function Tile({ book }) {
           >
             {book.title}
           </h3>
-          <p className="text-xs text-gray-600 font-bold">{book.writter}</p>
+          <p className="text-xs text-gray-600 font-bold">{book.author}</p>
           <div className="flex justify-between gap-20 font-thin text-sm text-green-300 mt-2 transition-all duration-300">
             <div className="flex items-center justify-center gap-1 border border-blue-300 rounded-lg bg-[rgba(1,1,1,.2)] w-16 h-5">
               <span>💷</span> <span>£{book.price}</span>

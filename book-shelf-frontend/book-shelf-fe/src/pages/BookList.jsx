@@ -8,9 +8,10 @@ function BookList() {
   const setBooks = useBookStore((state) => state.setBooks);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({getAll:""},{filtered:""});
+  const [error, setError] = useState({ getAll: "" }, { filtered: "" });
   const [resData, setResData] = useState({});
-  const [filteredData, setFilteredData] = useState([]);
+  const filteredData = useBookStore((state) => state.filteredData);
+  const setFilteredData = useBookStore((state) => state.setFilteredData);
   const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function BookList() {
         setBooks(response.items);
         setResData(response);
       } catch (error) {
-        setError({getAll:"No books found"});
+        setError({ getAll: "No books found" });
       } finally {
         setLoading(false);
       }
@@ -38,8 +39,10 @@ function BookList() {
       .then((data) => {
         setFilteredData(data.items);
         if (data.totalCount === 0) {
-          setError({filtered:"No search results"});
-        }else{setError({filtered:""})}
+          setError({ filtered: "No search results" });
+        } else {
+          setError({ filtered: "" });
+        }
       })
 
       .catch((e) => {
@@ -59,7 +62,7 @@ function BookList() {
         />
       </div>
       <h2 className="text-2xl font-medium my-10 mt-10">BOOKS</h2>
-      {filteredData.length!==0||error.filtered ? (
+      {filteredData.length !== 0 || error.filtered ? (
         <div>
           {error.filtered && <p className="text-red-600">{error.filtered}</p>}
           {loading && <p>Data Loading!!!</p>}
@@ -70,17 +73,19 @@ function BookList() {
           </div>
         </div>
       ) : (
-        !filterValue &&<div>
-          {loading && <p>Data Loading!!!</p>}
-          {error.getAll && <p className="text-red-600">{error.getAll}</p>}
-          <div className="flex flex-wrap gap-2 justify-center">
-            {books.map((b) => (
-              <div key={b.id}>{<Tile book={b} />}</div>
-            ))}
+        !filterValue && (
+          <div>
+            {loading && <p>Data Loading!!!</p>}
+            {error.getAll && <p className="text-red-600">{error.getAll}</p>}
+            <div className="flex flex-wrap gap-2 justify-center">
+              {books.map((b) => (
+                <div key={b.id}>{<Tile book={b} />}</div>
+              ))}
+            </div>
           </div>
-        </div>
+        )
       )}
-      {filteredData.length === 0 && !error.filtered &&(
+      {filteredData.length === 0 && !error.filtered && (
         <div className="flex justify-between text-yellow-300 text-sm my-4 font-bold ">
           <div
             onClick={() => {
