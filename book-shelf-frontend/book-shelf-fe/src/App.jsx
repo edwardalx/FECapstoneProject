@@ -19,8 +19,8 @@ function App() {
     <>
       <Header />
       <Routes>
-        {/* <Route path='*' element={<p className='text-red-600'>⚠️Sorry this page is not available</p>} /> */}
-        <Route path="/book-form" element={<BookShelf />} />
+        <Route path='*' element={<p className='text-red-600'>⚠️Sorry this page is not available</p>} />
+        <Route path="/book-form" element={<PrivateRoute><BookShelf /></PrivateRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/book-list" element={<BookList />} />
