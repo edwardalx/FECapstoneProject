@@ -1,155 +1,87 @@
-Ì≥ö Bookshelf App (FECapstoneProject)
+# Ì≥ö Bookshelf App (FECapstoneProject)
+
+A full-stack Bookshelf application with a React frontend and a .NET backend. Manages books in a tile-based UI, supports pagination, and includes foundations for authentication, authorization, and user history.
+
+---
+
+## Summary (today)
+- Consolidated project status and next steps.
+- Documented completed features (frontend & backend).
+- Added concise setup/run instructions for both repos.
+- Listed remaining backlog, enhancements, and infrastructure tasks.
+
+---
+
+## ‚úÖ Completed Features
+- Authentication & Authorization
+  - JWT login, token storage, protected routes, admin-only actions, user profile.
+- Book Management
+  - Tile-based responsive book grid, details view, pagination (Next/Previous), search.
+- UI/UX & State
+  - Responsive design (Tailwind planned), toast notifications, loading/error states.
+  - Centralized client state (Zustand), API helper/service layer.
+- Dev setup
+  - FE/BE decoupled, API proxy configured, VS Code C# environment prepared.
+
+---
+
+## ‚úÖ Setup Instructions (run both repos locally)
+
+Prerequisites
+- Windows: Node 16+ & npm, .NET 6+ SDK, SQL Server or LocalDB, Git.
+
+Backend (.NET)
+1. Clone backend repo:
+   git clone <backend-repo-url>
+2. Open folder:
+   cd book-shelf-backend
+3. Configure connection & JWT in appsettings.json:
+   - ConnectionStrings: DefaultConnection
+   - JwtSettings: SecretKey
+4. Restore, apply migrations, run:
+   dotnet restore
+   dotnet ef database update
+   dotnet watch run
+5. Default API URL (example): http://localhost:5093
+
+Frontend (React)
+1. Clone frontend repo (or use this folder):
+   git clone <frontend-repo-url>
+2. Open folder:
+   cd book-shelf-frontend
+3. Create .env (example):
+   VITE_API_URL=http://localhost:5093
+4. Install and run:
+   npm install
+   npm run dev
+5. App URL (example): http://localhost:5173
+
+Run order: start backend first, then frontend. Verify .env points to backend URL.
+
+---
+
+## Ì≥ã To Do / Roadmap (concise)
+- Backend: Payments (Paystack), purchase & read history, reviews/ratings, richer book metadata.
+- Frontend: Registration, admin UI gating, dark mode, filters, user dashboard, validations.
+- Infra: CI/CD, production deploy, logging/monitoring, caching, unit tests.
+
+---
+
+## Ìª†Ô∏è Tech Stack (short)
+- Frontend: React (Vite), TailwindCSS (planned), Zustand, React Router, React Toastify.
+- Backend: .NET 6, Entity Framework Core, SQL Server, JWT auth.
+- Deployment: Netlify/Vercel (FE), Azure/Render (BE) ‚Äî planned.
+
+---
+
+## Quick Commands
+- Frontend dev: npm run dev
+- Frontend build: npm run build
+- Backend dev: dotnet watch run
+- Apply migrations: dotnet ef database update
+
+---
+
+## License
+MIT
 
-A full-stack Bookshelf application built with a decoupled frontend (React) and backend (C#/.NET). The project manages books in a tile-based UI, supports pagination, and lays the foundation for authentication, authorization, and user book history.
-
-Ì¥ó GitHub Repository: edwardalx/FECapstoneProject
-
-‚úÖ Work Completed
-
-Backend
-
-Implemented pagination API to return books in chunks of 10.
-
-Decoupled BE from FE for scalability.
-
-Frontend
-
-Built Tile component to display books in grid format.
-
-Integrated API fetch helper for clean data fetching.
-
-‚ÄúMy Bookshelf‚Äù view now shows first 10 books with Next / Previous navigation.
-
-Setup
-
-VS Code C# environment configured.
-
-React frontend connected to backend APIs.
-
-Ì≥å Backlog / Roadmap
-Task 2
-
-Implement Authentication & Authorization.
-
-Add a User table in the backend (fields: username, password, email, isAdmin, booksRead[], isRead).
-
-Create Registration & Login functions on the frontend.
-
-Task 3
-
-Restrict Add Book button visibility to admins only.
-
-Task 4
-
-Users should be able to access:
-
-Book history
-
-Books read history
-
-Ì≤° Suggestions / Enhancements
-
-External API Integration: Consider integrating the Open Library API for real-world book data (covers, authors, publishers, ISBN).
-
-Search Functionality: Add a search bar to filter books by title, author, or keywords.
-
-Responsive UI: Use TailwindCSS (or similar) for clean, responsive design.
-
-Error Handling: Show user-friendly messages for network errors or empty results.
-
-Stretch Goals:
-
-User reading list & progress tracking.
-
-Reviews and ratings per book.
-
-Dark mode support.
-
-Deployment on Netlify/Vercel (frontend) and Azure/Heroku (backend).
-
-ÌøóÔ∏è Tech Stack
-
-Frontend: React, JavaScript (Tiles UI, API integration).
-
-Backend: C# / .NET (Pagination, Authentication, Data storage).
-
-Styling: TailwindCSS (planned).
-
-Deployment: Netlify / Vercel (planned for FE), Azure / Render (planned for BE).Ì≥ö Bookshelf App (FECapstoneProject)
-
-A full-stack Bookshelf application built with a decoupled frontend (React) and backend (C#/.NET). The project manages books in a tile-based UI, supports pagination, and lays the foundation for authentication, authorization, and user book history.
-
-Ì¥ó GitHub Repository: edwardalx/FECapstoneProject
-
-‚úÖ Work Completed
-
-Backend
-
-Implemented pagination API to return books in chunks of 10.
-
-Decoupled BE from FE for scalability.
-
-Frontend
-
-Built Tile component to display books in grid format.
-
-Integrated API fetch helper for clean data fetching.
-
-‚ÄúMy Bookshelf‚Äù view now shows first 10 books with Next / Previous navigation.
-
-Setup
-
-VS Code C# environment configured.
-
-React frontend connected to backend APIs.
-
-Ì≥å Backlog / Roadmap
-Task 2
-
-Implement Authentication & Authorization.
-
-Add a User table in the backend (fields: username, password, email, isAdmin, booksRead[], isRead).
-
-Create Registration & Login functions on the frontend.
-
-Task 3
-
-Restrict Add Book button visibility to admins only.
-
-Task 4
-
-Users should be able to access:
-
-Book history
-
-Books read history
-
-Ì≤° Suggestions / Enhancements
-
-External API Integration: Consider integrating the Open Library API for real-world book data (covers, authors, publishers, ISBN).
-
-Search Functionality: Add a search bar to filter books by title, author, or keywords.
-
-Responsive UI: Use TailwindCSS (or similar) for clean, responsive design.
-
-Error Handling: Show user-friendly messages for network errors or empty results.
-
-Stretch Goals:
-
-User reading list & progress tracking.
-
-Reviews and ratings per book.
-
-Dark mode support.
-
-Deployment on Netlify/Vercel (frontend) and Azure/Heroku (backend).
-
-ÌøóÔ∏è Tech Stack
-
-Frontend: React, JavaScript (Tiles UI, API integration).
-
-Backend: C# / .NET (Pagination, Authentication, Data storage).
-
-Styling: TailwindCSS (planned).
-
-Deployment: Netlify / Vercel (planned for FE), Azure / Render (planned for BE).
