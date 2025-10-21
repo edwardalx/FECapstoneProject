@@ -80,15 +80,15 @@ function BookList() {
           </div>
         </div>
       )}
-      {filteredData.length === 0 && !error&&(
-        <div className="flex justify-between text-[rgba(245,237,237,1)] text-sm my-4 font-bold ">
+      {filteredData.length === 0 && !error.filtered &&(
+        <div className="flex justify-between text-yellow-300 text-sm my-4 font-bold ">
           <div
             onClick={() => {
               if (page > 1) {
                 setPage(page - 1);
               }
             }}
-            className={`cursor-pointer translate-all duration-300 ${
+            className={`cursor-pointer transition-all duration-300 ${
               page === 1 ? "text-purple-300" : ""
             }`}
           >
@@ -103,7 +103,7 @@ function BookList() {
                 setPage(page + 1);
               }
             }}
-            className={`cursor-pointer translate-all duration-300 ${
+            className={`cursor-pointer transition-all duration-300 ${
               page === resData.totalPages ? "text-purple-300" : ""
             }`}
           >
