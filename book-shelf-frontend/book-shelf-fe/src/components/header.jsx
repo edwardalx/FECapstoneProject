@@ -7,7 +7,7 @@ export function Header() {
   const token = useTokenStore((state) => state.token);
 
   const logout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.clear();
     setToken("");
   };
   return (

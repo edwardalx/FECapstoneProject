@@ -7,9 +7,12 @@ export default function PrivateRoute({ children }) {
     useTokenStore((state) => state.token) ||
     localStorage.getItem("access_token");
   const navigate = useNavigate();
+  useEffect(() => {
+   if(!token){ toast("Please login before accessing this page");}
+  }, [token])
+  
 
   if (!token) {
-    toast("Please login before accessing this page");
     return (
       <div>
         <div className="flex flex-col justify-center items-center p-10 gap-5 my-10 font-medium italic">

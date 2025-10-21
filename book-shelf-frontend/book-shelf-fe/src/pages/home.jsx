@@ -29,7 +29,7 @@ export function Home() {
           <li>
             <Link
               to={"/book-list"}
-              className="px-6 py-3 rounded-3xl bg-[rgba(37,99,235,.7)] text-white font-medium hover:bg-blue-800 transition transform hover:-translate-y-1 inline-block"
+              className="px-6 py-3 rounded-2xl bg-[rgba(37,99,235,.7)] text-white font-medium hover:bg-blue-800 transition transform hover:-translate-y-1 inline-block"
             >
               Visit all books
             </Link>
@@ -38,7 +38,7 @@ export function Home() {
             {" "}
             <Link
               to="/book-form"
-              className="px-6 py-3 rounded-3xl bg-blue-600/60 text-white font-medium hover:bg-blue-800 transition transform hover:-translate-y-1 inline-block"
+              className="px-6 py-3 rounded-2xl bg-blue-600/60 text-white font-medium hover:bg-blue-800 transition transform hover:-translate-y-1 inline-block"
             >
               Add Books
             </Link>

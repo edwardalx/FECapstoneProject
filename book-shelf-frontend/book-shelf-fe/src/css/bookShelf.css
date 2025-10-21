@@ -1,44 +1,49 @@
-.shelf-card{
-   display: flex;
+.shelf-card {
+  display: flex;
   flex-direction: column;
   max-width: 500px;
   min-height: 500px;
-  margin: auto;
+  margin-inline: auto;
+  margin-top: 80px;
   padding: 30px;
   background-color: rgba(135, 206, 235, 0.4);
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-form{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.title,.author, .year, .checkbox{
-    display: flex;
-    padding: 10px;
-    align-items: center;
-    gap: 8px; 
+.title,
+.author,
+.year,
+.checkbox {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 8px;
 }
-.title{
-    margin-left: 16px;
+.title {
+  margin-left: 16px;
 }
 
-.checkbox{
-    display: flex;
-    flex-direction: row-reverse;
+.checkbox {
+  display: flex;
+  flex-direction: row-reverse;
 }
-input, label{
-    padding: 0 10px;
-    font-weight:bold;
-    height: 25px;
+input,
+label {
+  padding: 0 10px;
+  font-weight: bold;
+  height: 25px;
 }
-.buttons{
-    display: flex;
-    gap: 20px;
-    align-items: center;
+.buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 .buttons button {
   padding: 10px 30px;
