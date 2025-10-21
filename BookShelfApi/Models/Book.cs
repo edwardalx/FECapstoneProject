@@ -10,7 +10,7 @@ namespace BookShelfApi.Models
         public decimal Price { get; set; }
         public string Summary { get; set; } = string.Empty;
         public string Image_url { get; set; } = string.Empty;
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
 
         public virtual ICollection<User> ReadByUsers { get; set; } = new List<User>();
     }
