@@ -9,7 +9,7 @@ namespace BookShelfApi.Profiles
         public BookProfile()
         {
             CreateMap<Book, BooksDto>()
-                .ForMember(dest => dest.Writter, opt => opt.MapFrom(src => src.Author));
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author));
             CreateMap<UpdateBooksDto, Book>();
         }
     }
