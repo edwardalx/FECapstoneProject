@@ -1,1 +1,77 @@
 .vs
+# Build folders
+bin/
+obj/
+out/
+
+# Publish output
+publish/
+**/publish/
+**/publish*/ 
+*.pubxml
+*.pubxml.user
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE settings
+.vscode/
+.vs/
+
+# Logs
+*.log
+Logs/
+logs/
+
+# Temp files
+*.tmp
+*.temp
+*.DS_Store
+
+# Coverage
+TestResults/
+coverage/
+coverage.info
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# ASP.NET files
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Secrets.json
+appsettings.*.json
+
+# Certificates
+*.pfx
+*.p12
+*.cer
+*.key
+*.pem
+
+# Docker build artifacts
+docker-compose.override.yml
+*.env
+.env.local
+
+# Resharper / Rider
+_ReSharper*/
+*.DotSettings.user
+.idea/
+
+# OS-specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
