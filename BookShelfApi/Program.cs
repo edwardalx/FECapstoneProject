@@ -10,9 +10,34 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ✅ Optional: Only force port 5001 if nothing else is configured
+// builder.WebHost.ConfigureKestrel(options =>
+// {
+//     // Use 5001 *only if* no port is provided via --urls or environment
+//     var hasUrlArg = args.Any(a => a.StartsWith("--urls", StringComparison.OrdinalIgnoreCase));
+//     var envVarUrl = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
+
+//     if (!hasUrlArg && string.IsNullOrEmpty(envVarUrl))
+//     {
+//         options.ListenAnyIP(5001);
+//     }
+// });
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5001); // HTTP
+    options.ListenAnyIP(5002, listenOptions =>
+    {
+        listenOptions.UseHttps(); // HTTPS
+    });
+});
+
+
+// ✅ Database Context
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+// ✅ Authentication & JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -29,21 +54,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+// ✅ Dependency Injection
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddControllers();
+// ✅ AutoMapper
 builder.Services.AddAutoMapper(typeof(BookProfile), typeof(UserProfile));
+
+// ✅ Controllers & Swagger
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookShelf API", Version = "v1" });
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme.",
         Name = "Authorization",
-        In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
-        Scheme = "bearer"
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer {token}'"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -61,14 +94,29 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
 var app = builder.Build();
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+
+// ✅ Auto-apply migrations (optional)
+if (args.Contains("--migrate"))
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    Console.WriteLine("Applying migrations...");
+    db.Database.Migrate();
+    Console.WriteLine("Migrations applied successfully.");
+    return;
 }
+
+// ✅ Middleware pipeline
+
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+// ✅ Run app — no hard-coded URL
 app.Run();
