@@ -44,10 +44,9 @@ packages/
 .nuget/
 
 # ASP.NET files
-appsettings.Development.json
 appsettings.Local.json
+appsettings.*.user.json
 appsettings.Secrets.json
-appsettings.*.json
 
 # Certificates
 *.pfx
