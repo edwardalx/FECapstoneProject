@@ -51,56 +51,54 @@ function BookList() {
   }, [filterValue]);
 
   return (
-    <div className="flex flex-col justify-center py-10">
-      <div className="font-thin">
+    <div className="flex flex-col justify-center py-10 px-4">
+      <div className="font-thin w-full flex justify-center mb-4">
         <input
           type="text"
-          className="border border-blue-300 rounded-[20px] w-200 text-white bg-[rgba(159,211,240,.3)] font-thin italic"
-          placeholder={`${"Search by Book Title..."}`}
+          className="border border-blue-300 rounded-full w-full max-w-md sm:max-w-lg text-white bg-[rgba(159,211,240,.3)] italic px-4 py-2"
+          placeholder={`Search by Book Title...`}
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value.trimStart())}
         />
       </div>
-      <h2 className="text-2xl font-medium my-10 mt-10">BOOKS</h2>
+      <h2 className="text-2xl font-medium my-6 mt-4 text-center">BOOKS</h2>
       {filteredData.length !== 0 || error.filtered ? (
         <div>
-          {error.filtered && <p className="text-red-600">{error.filtered}</p>}
-          {loading && <p>Data Loading!!!</p>}
-          <div className="flex flex-wrap gap-2 justify-center">
+          {error.filtered && <p className="text-red-600 text-center">{error.filtered}</p>}
+          {loading && <p className="text-center">Data Loading...</p>}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
             {filteredData.map((b) => (
-              <div key={b.id}>{<Tile book={b} />}</div>
+              <div key={b.id} className="w-full">{<Tile book={b} />}</div>
             ))}
           </div>
         </div>
       ) : (
         !filterValue && (
           <div>
-            {loading && <p>Data Loading!!!</p>}
-            {error.getAll && <p className="text-red-600">{error.getAll}</p>}
-            <div className="flex flex-wrap gap-2 justify-center">
+            {loading && <p className="text-center">Data Loading...</p>}
+            {error.getAll && <p className="text-red-600 text-center">{error.getAll}</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
               {books.map((b) => (
-                <div key={b.id}>{<Tile book={b} />}</div>
+                <div key={b.id} className="w-full">{<Tile book={b} />}</div>
               ))}
             </div>
           </div>
         )
       )}
       {filteredData.length === 0 && !error.filtered && (
-        <div className="flex justify-between text-yellow-300 text-sm my-4 font-bold ">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-yellow-300 text-sm my-4 font-bold gap-3">
           <div
             onClick={() => {
               if (page > 1) {
                 setPage(page - 1);
               }
             }}
-            className={`cursor-pointer transition-all duration-300 ${
-              page === 1 ? "text-purple-300" : ""
-            }`}
+            className={`cursor-pointer transition-all duration-300 ${page === 1 ? "text-purple-300" : ""}`}
           >
             Previous
           </div>
           <div className="text-[rgba(180,15,117,1)]">
-            Page {resData.pageNumber} of {resData.totalPages}
+            Page {resData.pageNumber || 0} of {resData.totalPages || 0}
           </div>
           <div
             onClick={() => {
@@ -108,9 +106,7 @@ function BookList() {
                 setPage(page + 1);
               }
             }}
-            className={`cursor-pointer transition-all duration-300 ${
-              page === resData.totalPages ? "text-purple-300" : ""
-            }`}
+            className={`cursor-pointer transition-all duration-300 ${page === resData.totalPages ? "text-purple-300" : ""}`}
           >
             Next
           </div>

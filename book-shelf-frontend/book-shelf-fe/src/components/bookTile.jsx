@@ -11,37 +11,32 @@ export function Tile({ book }) {
     navigate(`/book/${book.id}/payment`);
   };
   return (
-    <div>
-      <Link to={`/book/${book.id}`} className="tile">
-        <div className="transition-all duration-500 rounded-lg shadow-md overflow-hidden flex flex-col  w-25 h-35 hover:size-full ">
-          <img
-            src={
-              !book.image_url || book.image_url === "N/A"
-                ? bookcoverUrl
-                : book.image_url
-            }
-            alt={book.title}
-            className="m-auto size-full object-contain"
-          />
-        </div>
-        <div className="p-.5 flex flex-col gap-.5">
-          <h3
-            className={`text-sm font-semibold line-clamp-2 ${
-              book.title.length > 20 && "text-xs"
-            }`}
-          >
-            {book.title}
-          </h3>
-          <p className="text-xs text-gray-600 font-bold">{book.author}</p>
-          <div className="flex justify-between gap-20 font-thin text-sm text-green-300 mt-2 transition-all duration-300">
-            <div className="flex items-center justify-center gap-1 border border-blue-300 rounded-lg bg-[rgba(1,1,1,.2)] w-16 h-5">
-              <span>💷</span> <span>£{book.price}</span>
-            </div>
-            <div
-              onClick={handleClick}
-              className="border border-blue-300  rounded rounded-lg bg-[rgba(232,6,205,0.36)] w-10 h-5 hover:bg-[rgba(232,6,205,0.5)]"
-            >
-              Buy
+    <div className="w-full max-w-xs">
+      <Link to={`/book/${book.id}`} className="block no-underline">
+        <div className="rounded-lg shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow">
+          <div className="w-full h-48 bg-center bg-cover" style={{
+            backgroundImage: `url(${!book.image_url || book.image_url === "N/A" ? bookcoverUrl : book.image_url})`
+          }} role="img" aria-label={book.title}></div>
+
+          <div className="p-3">
+            <h3 className={`font-semibold mb-1 text-sm md:text-base ${book.title?.length > 40 ? "text-xs" : ""}`}>
+              {book.title}
+            </h3>
+            <p className="text-xs text-gray-600 font-bold mb-2">{book.author}</p>
+
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 px-2 py-1 rounded bg-[rgba(1,1,1,.06)] border border-blue-200 text-sm">
+                <span>💷</span>
+                <span>£{book.price}</span>
+              </div>
+
+              <button
+                onClick={handleClick}
+                className="ml-auto text-sm bg-pink-500 hover:bg-pink-600 text-white px-3 py-1 rounded"
+                aria-label={`Buy ${book.title}`}
+              >
+                Buy
+              </button>
             </div>
           </div>
         </div>

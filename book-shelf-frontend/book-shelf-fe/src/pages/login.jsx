@@ -55,48 +55,48 @@ export function Login() {
     }
   }
   return (
-    <div className="relative flex flex-col justify-center  bg-[rgba(135,206,235,0.4)] border rounded-[15px] shadow-xl max-w-[500px] m-auto mt-20 ">
+    <div className="relative flex flex-col justify-center bg-[rgba(135,206,235,0.4)] border rounded-[15px] shadow-xl w-11/12 max-w-md sm:max-w-md lg:max-w-lg m-auto mt-16 px-4 py-6">
       {error && (
-        <p className="text-red-500 text-sm absolute top-1/12 left-1/2 -translate-x-1/2">
+        <p className="text-red-500 text-sm absolute top-4 left-1/2 -translate-x-1/2">
           {error}
         </p>
       )}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-4  m-auto"
+        className="flex flex-col items-center justify-center gap-4  m-auto w-full"
       >
-        <div className="flex flex-col item-center justify-center gap-4 mt-10">
-          <div className="flex sm:flex">
-            <label htmlFor="email" className="">
+        <div className="flex flex-col items-center justify-center gap-4 mt-2 w-full">
+          <div className="flex flex-col sm:flex-row w-full items-center gap-2">
+            <label htmlFor="email" className="w-full sm:w-auto">
               Username:
             </label>
             <input
               type="text"
               id="email"
               name="email"
-              className="text-white border border-black"
+              className="text-white border border-black flex-1 rounded px-2 py-1"
               placeholder="Enter Email"
               value={form.email}
               autoComplete="current-username"
               onChange={handleChange}
             />
           </div>
-          <div className="relative flex sm:flex items-center">
-            <label htmlFor="password">Password:</label>
+          <div className="relative flex flex-col sm:flex-row items-center w-full gap-2">
+            <label htmlFor="password" className="w-full sm:w-auto">Password:</label>
             <input
               type={!showPassword ? "password" : "text"}
               id="password"
               placeholder="Enter Password"
               name="password"
               value={form.password}
-              className="border border-black text-white pr-10 flex-1"
+              className="border border-black text-white pr-10 flex-1 rounded px-2 py-1"
               autoComplete="current-password"
               onChange={handleChange}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2"
+              className="absolute right-2 top-2 sm:static sm:ml-2"
             >
               {showPassword ? "🙈" : "👁️"}
             </button>
@@ -105,7 +105,7 @@ export function Login() {
 
         <button
           type="submit"
-          className="bg-[rgba(233,69,151,0.712)] w-[80px] h-8 rounded-[25px] hover:bg-[rgba(233,69,151,0.5)] font-bold "
+          className="bg-[rgba(233,69,151,0.712)] w-28 h-8 rounded-[25px] hover:bg-[rgba(233,69,151,0.5)] font-bold "
         >
           Login
         </button>

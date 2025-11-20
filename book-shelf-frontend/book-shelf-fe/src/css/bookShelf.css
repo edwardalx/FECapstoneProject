@@ -68,7 +68,7 @@ label {
 }
 
 /* ✅ RESPONSIVE SECTION */
-/* @media (max-width: 640px) {
+@media (max-width: 640px) {
   .shelf-card {
     width: 95%;
     max-width: 400px;
@@ -133,4 +133,4 @@ label {
     padding: 8px 0;
     font-size: 14px;
   }
-} */
+}

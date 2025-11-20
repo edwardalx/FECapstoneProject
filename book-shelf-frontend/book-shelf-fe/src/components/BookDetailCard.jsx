@@ -3,46 +3,46 @@ import bookcoverUrl from "../assets/book-image2.jpg";
 import { Outlet } from "react-router-dom";
 export default function BookDetailCard({ book }) {
   const navigate = useNavigate();
-  const handleBuy = () => {
-    navigate("payment");
-  };
+  const handleBuy = () => navigate("payment");
+
   return (
-    <div className="min-h-screen flex items-center p-4">
-      <div className="w-full  h-full flex justify-center">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden relative flex flex-col h-full justify-between ">
-          {/* Green gradient header */}
-          <div className="p-5 bg-gradient-to-br from-gray-800 via-green-800 to-green-600 text-2xl font-medium">
-            <h1>{book.author}'s</h1>
-          </div>
+    <div className="w-full flex justify-center p-4">
+      {/* Card: mobile-first stacked, becomes row on md */}
+      <article className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+        {/* Image section */}
+        <div
+          className="w-full md:w-1/2 h-56 md:h-auto bg-center bg-cover"
+          style={{
+            backgroundImage: `url(${book.image_url && book.image_url !== "N/A" ? book.image_url : bookcoverUrl})`,
+          }}
+          role="img"
+          aria-label={book.title}
+        />
+        {/* Content section */}
+        <div className="w-full md:w-1/2 p-4 md:p-6 flex flex-col">
+          <header className="mb-2">
+            <h1 className="text-lg md:text-2xl font-semibold text-gray-900">{book.title}</h1>
+            <p className="text-sm md:text-base text-gray-600 mt-1">{book.author}</p>
+          </header>
 
-          {/* Content + Button section */}
-          <div
-            className="flex flex-col flex-1 p-35 h-full object-contain  bg-center"
-            style={{ backgroundImage: `url(${bookcoverUrl})` }}
-          >
-            {/* Scrollable content if long */}
-            <div className="overflow-auto ">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                {book.title}
-              </h2>
-              <p className="text-white font-medium leading-relaxed">
-                {book.summary}
-              </p>
-            </div>
+          <section className="flex-1 overflow-auto text-gray-700">
+            <p className="text-sm md:text-base leading-relaxed">{book.summary}</p>
+          </section>
 
-            {/* Button aligned bottom right */}
-            <div className="absolute bottom-2 right-5">
+          <footer className="mt-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div className="text-lg font-semibold text-green-600">£{book.price}</div>
+
               <button
                 onClick={handleBuy}
-                className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-0.5 px-8 rounded-[20px] transition-colors duration-200 shadow-md hover:shadow-lg flex flex-col items-center "
+                className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
               >
-                <p>Price: {book.price}</p>
-                <p>Buy</p>
+                Buy
               </button>
             </div>
-          </div>
+          </footer>
         </div>
-      </div>
+      </article>
       <Outlet />
     </div>
   );

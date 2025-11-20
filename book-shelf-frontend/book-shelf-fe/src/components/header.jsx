@@ -5,6 +5,7 @@ import { useTokenStore } from "../zu-store/authStore";
 
 export function Header() {
   const token = useTokenStore((state) => state.token);
+  const setToken = useTokenStore((state) => state.setToken); // added
 
   const logout = () => {
     localStorage.clear();
@@ -12,29 +13,31 @@ export function Header() {
   };
   return (
     <header>
-      <nav className="nav-list ">
-        <div className="icon ">
+      {/* responsive nav: logo left, links right */}
+      <nav className="nav-list flex items-center justify-between px-4 py-3 max-w-6xl mx-auto">
+        <div className="icon">
           <Link
             to="/book-list"
-            className="text-2xl font-bold translate-all duration-300 hover:text-3xl absolute"
+            className="text-lg sm:text-2xl font-bold hover:scale-105 transition-transform duration-200"
           >
-            📚My BookShelf
+            📚 My BookShelf
           </Link>
         </div>
-        <ul className="nav-links gap-20">
+
+        <ul className="nav-links flex gap-4 sm:gap-8 items-center">
           <li>
             {token ? (
               <Link
                 to="/"
                 onClick={logout}
-                className="text-2xl font-bold translate-all duration-300 hover:text-3xl absolute"
+                className="text-sm sm:text-lg font-medium hover:underline"
               >
                 Logout
               </Link>
             ) : (
               <Link
                 to="/login"
-                className="text-2xl font-bold translate-all duration-300 hover:text-3xl absolute"
+                className="text-sm sm:text-lg font-medium hover:underline"
               >
                 Login
               </Link>
@@ -43,7 +46,7 @@ export function Header() {
           <li>
             <Link
               to="/"
-              className="text-2xl font-bold  translate-all duration-300 hover:text-3xl  absolute"
+              className="text-sm sm:text-lg font-medium hover:underline"
             >
               Home
             </Link>
