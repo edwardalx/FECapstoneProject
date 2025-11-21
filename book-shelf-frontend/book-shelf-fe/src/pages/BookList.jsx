@@ -25,6 +25,7 @@ function BookList() {
         setError({ getAll: "No books found" });
       } finally {
         setLoading(false);
+        localStorage.removeItem("selectedBook")
       }
     };
     fetchBooks();

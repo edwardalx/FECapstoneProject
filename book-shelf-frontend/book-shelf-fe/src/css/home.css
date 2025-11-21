@@ -7,13 +7,50 @@
 .home-main{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1.5rem;
 }
-.home-main a, li{
-     text-decoration: none;
-     padding: 8px;
-     list-style-type: none;
-     
+/* Target the list used for CTAs on the home page */
+.home-main ul {
+    display: flex;
+    flex-direction: column; /* stack on mobile */
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
 }
-li:hover{
-font-weight: bold;
+/* make each link a larger touch target on small screens */
+.home-main ul li {
+    list-style: none;
+    width: 100%;
+    max-width: 320px;
+}
+.home-main ul li a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+}
+/* Switch to horizontal layout on medium+ screens */
+@media (min-width: 640px) {
+    .home-main ul {
+        flex-direction: row;
+    }
+    .home-main ul li {
+        width: auto;
+        max-width: none;
+    }
+    .home-main ul li a {
+        display: inline-block;
+        width: auto;
+        padding: 0.6rem 1.2rem;
+    }
+}
+/* Hover emphasis */
+.home-main ul li:hover {
+    font-weight: 700;
 }

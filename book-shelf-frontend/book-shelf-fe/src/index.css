@@ -1,5 +1,6 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px; /* base */
   line-height: 1.5;
   font-weight: 400;
 
@@ -22,17 +23,31 @@ a:hover {
   color: #535bf2;
 }
 
+/* Replace global layout rules to be mobile-first and not center the whole app */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  min-width: 0; /* allow shrinking on small screens */
+  background-clip: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* don't center entire app; let each layout component handle alignment */
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 1.6rem; /* mobile */
+  line-height: 1.15;
+  margin: 0.5rem 0;
+}
+@media (min-width: 640px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+}
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3.2rem;
+  }
 }
 
 button {
@@ -64,5 +79,13 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }

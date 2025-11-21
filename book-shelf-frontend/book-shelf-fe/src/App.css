@@ -1,10 +1,4 @@
 @import "tailwindcss";
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
 /* 
 .logo {
   height: 6em;
@@ -41,3 +35,31 @@
 .read-the-docs {
   color: #888;
 } */
+
+/* Responsive app container for content centering */
+#root {
+  max-width: 1280px;
+  width: 94%;
+  margin: 0 auto;
+  padding: 1.25rem; /* mobile-friendly padding */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  #root {
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #root {
+    padding: 2rem;
+  }
+}
+
+/* Avoid huge logos or elements overflowing on small screens - helper */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}

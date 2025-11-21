@@ -1,8 +1,38 @@
 body{
-    background: url("../assets/book-image.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url("../assets/book-image.jpg") center / cover no-repeat;
     color: #333;
+    background-attachment: scroll; /* default: don't use fixed on mobile */
+    position: relative;
+    min-height: 100vh;
+}
+
+/* subtle overlay to improve readability */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* background: rgba(0,0,0,0.35); */  
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ensure app content sits above overlay */
+#root, #root > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* On larger screens allow slight parallax by enabling fixed attachment */
+@media (min-width: 1024px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+/* On narrow screens reduce background-size to avoid heavy repaint */
+@media (max-width: 420px) {
+  body {
+    background-position: center top;
+    background-size: cover;
+  }
 }
