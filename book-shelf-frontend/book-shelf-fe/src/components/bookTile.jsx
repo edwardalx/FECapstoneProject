@@ -10,9 +10,17 @@ export function Tile({ book }) {
     e.stopPropagation();
     navigate(`/book/${book.id}/payment`);
   };
+  const handleTouch = (e) => {
+    e.preventDefault();
+    localStorage.setItem("selectedBook", JSON.stringify(book));
+  };
+
+   const handleRightClick = () => {
+    localStorage.setItem("selectedBook", JSON.stringify(book));
+  };
   return (
     <div>
-      <Link to={`/book/${book.id}`} className="tile">
+      <Link to={`/book/${book.id}`} className="tile" onTouchEnd={handleTouch} onContextMenu={handleRightClick}>
         <div className="transition-all duration-500 rounded-lg shadow-md overflow-hidden flex flex-col  w-25 h-35 hover:size-full ">
           <img
             src={
