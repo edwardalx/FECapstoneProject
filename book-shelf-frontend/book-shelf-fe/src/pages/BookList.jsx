@@ -25,7 +25,7 @@ function BookList() {
         setError({ getAll: "No books found" });
       } finally {
         setLoading(false);
-        localStorage.removeItem("selectedBook")
+        localStorage.removeItem("selectedBook");
       }
     };
     fetchBooks();
@@ -67,7 +67,7 @@ function BookList() {
         <div>
           {error.filtered && <p className="text-red-600">{error.filtered}</p>}
           {loading && <p>Data Loading!!!</p>}
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 justify-items-center">
             {filteredData.map((b) => (
               <div key={b.id}>{<Tile book={b} />}</div>
             ))}
@@ -78,7 +78,7 @@ function BookList() {
           <div>
             {loading && <p>Data Loading!!!</p>}
             {error.getAll && <p className="text-red-600">{error.getAll}</p>}
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5Ks justify-items-center">
               {books.map((b) => (
                 <div key={b.id}>{<Tile book={b} />}</div>
               ))}
@@ -86,7 +86,7 @@ function BookList() {
           </div>
         )
       )}
-      {filteredData.length === 0 && !error.filtered && (
+      {filteredData.length === 0 && !error.filtered && !error.getAll && (
         <div className="flex justify-between text-yellow-300 text-sm my-4 font-bold ">
           <div
             onClick={() => {

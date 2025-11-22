@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useTokenStore } from "../zu-store/authStore";
 
 export function Login() {
-  const setToken = useTokenStore((state)=>(state.setToken))
+  const setToken = useTokenStore((state) => state.setToken);
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,7 +28,7 @@ export function Login() {
           "access_token",
           `${JSON.stringify(responseData.token)}`
         );
-        setToken(responseData.token)
+        setToken(responseData.token);
         setForm({ email: "", password: "" });
         navigate("/");
         return;
@@ -63,7 +63,7 @@ export function Login() {
       )}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-4  m-auto"
+        className="flex flex-col items-center justify-center gap-4  m-auto w-full"
       >
         <div className="flex flex-col item-center justify-center gap-4 mt-10">
           <div className="flex sm:flex">
@@ -74,7 +74,7 @@ export function Login() {
               type="text"
               id="email"
               name="email"
-              className="text-white border border-black"
+              className="text-white border border-black placeholder:text-gray-300 placeholder:italic placeholder:text-xs placeholder:font-thin"
               placeholder="Enter Email"
               value={form.email}
               autoComplete="current-username"
@@ -89,7 +89,7 @@ export function Login() {
               placeholder="Enter Password"
               name="password"
               value={form.password}
-              className="border border-black text-white pr-10 flex-1"
+              className="text-white border border-black placeholder:text-gray-300 placeholder:italic placeholder:text-xs placeholder:font-thin"
               autoComplete="current-password"
               onChange={handleChange}
             />
@@ -105,7 +105,8 @@ export function Login() {
 
         <button
           type="submit"
-          className="bg-[rgba(233,69,151,0.712)] w-[80px] h-8 rounded-[25px] hover:bg-[rgba(233,69,151,0.5)] font-bold "
+          //  className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+          className="w-auto mx-auto bg-blue-500 py-2 px-10 rounded-[25px] hover:bg-[rgba(233,69,151,0.5)] font-bold transition-all"
         >
           Login
         </button>

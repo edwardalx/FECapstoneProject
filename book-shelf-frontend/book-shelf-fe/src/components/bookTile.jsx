@@ -11,16 +11,20 @@ export function Tile({ book }) {
     navigate(`/book/${book.id}/payment`);
   };
   const handleTouch = (e) => {
-    e.preventDefault();
     localStorage.setItem("selectedBook", JSON.stringify(book));
   };
 
-   const handleRightClick = () => {
+  const handleRightClick = () => {
     localStorage.setItem("selectedBook", JSON.stringify(book));
   };
   return (
     <div>
-      <Link to={`/book/${book.id}`} className="tile" onTouchEnd={handleTouch} onContextMenu={handleRightClick}>
+      <Link
+        to={`/book/${book.id}`}
+        className="tile"
+        onTouchEnd={handleTouch}
+        onContextMenu={handleRightClick}
+      >
         <div className="transition-all duration-500 rounded-lg shadow-md overflow-hidden flex flex-col  w-25 h-35 hover:size-full ">
           <img
             src={
@@ -41,13 +45,14 @@ export function Tile({ book }) {
             {book.title}
           </h3>
           <p className="text-xs text-gray-600 font-bold">{book.author}</p>
-          <div className="flex justify-between gap-20 font-thin text-sm text-green-300 mt-2 transition-all duration-300">
-            <div className="flex items-center justify-center gap-1 border border-blue-300 rounded-lg bg-[rgba(1,1,1,.2)] w-16 h-5">
+          <div className="flex items-center justify-between gap-3 m-4">
+            <div className="flex items-center gap-2 px-2 py-1 rounded bg-[rgba(1,1,1,.06)] border border-blue-200 text-sm">
               <span>💷</span> <span>£{book.price}</span>
             </div>
             <div
               onClick={handleClick}
-              className="border border-blue-300  rounded rounded-lg bg-[rgba(232,6,205,0.36)] w-10 h-5 hover:bg-[rgba(232,6,205,0.5)]"
+              className="ml-auto text-sm bg-pink-500 hover:bg-pink-600 text-white px-3 py-1 rounded"
+              aria-label={`Buy ${book.title}`}
             >
               Buy
             </div>
