@@ -22,7 +22,7 @@ export function Tile({ book }) {
       <Link
         to={`/book/${book.id}`}
         className="tile"
-        onTouchEnd={handleTouch}
+        onTouchStart={handleTouch}
         onContextMenu={handleRightClick}
       >
         <div className="transition-all duration-500 rounded-lg shadow-md overflow-hidden flex flex-col  w-25 h-35 hover:size-full ">

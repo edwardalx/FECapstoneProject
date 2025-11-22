@@ -25,7 +25,7 @@ export default function BookDetailCard({ book }) {
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 {book.title}
               </h2>
-              <p className="flex-1 overflow-auto text-gray-700">
+              <p className="flex-1 overflow-auto text-white">
                 {book.summary}
               </p>
             </div>
@@ -46,7 +46,6 @@ export default function BookDetailCard({ book }) {
           </div>
         </div>
       </div>
-      <Outlet />
     </div>
   );
 }
