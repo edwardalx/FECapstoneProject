@@ -5,7 +5,7 @@
 namespace BookShelfApi.Migrations
 {
     /// <inheritdoc />
-    public partial class ForRemoteServerDb : Migration
+    public partial class AddPricePrecision : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

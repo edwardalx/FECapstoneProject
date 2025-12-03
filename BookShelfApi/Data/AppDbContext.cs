@@ -13,6 +13,9 @@ namespace BookShelfApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+             modelBuilder.Entity<Book>()
+                .Property(b => b.Price)
+                .HasPrecision(18, 2); // Adjust precision/scale as needed
 
             modelBuilder.Entity<UserBook>()
                 .HasKey(ub => new { ub.UserId, ub.BookId });

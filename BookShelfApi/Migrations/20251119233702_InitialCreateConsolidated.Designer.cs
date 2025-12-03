@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShelfApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251028205414_ForRemoteServerDb")]
-    partial class ForRemoteServerDb
+    [Migration("20251119233702_InitialCreateConsolidated")]
+    partial class InitialCreateConsolidated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
